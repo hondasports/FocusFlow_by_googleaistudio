@@ -25,6 +25,12 @@ const Icons: Record<SoundType, React.ElementType> = {
 export const SoundCard: React.FC<SoundCardProps> = ({ id, name, volume, isActive, onVolumeChange, onToggle }) => {
   const Icon = Icons[id];
 
+  const presets = [
+    { label: 'Low', val: 0.2 },
+    { label: 'Med', val: 0.5 },
+    { label: 'High', val: 0.8 },
+  ];
+
   return (
     <div className={`p-4 rounded-xl transition-all duration-300 border backdrop-blur-md flex flex-col items-center gap-3
       ${isActive && volume > 0 ? 'bg-white/10 border-white/20 shadow-lg' : 'bg-slate-900/40 border-slate-800 hover:bg-slate-800/60'}
@@ -53,6 +59,26 @@ export const SoundCard: React.FC<SoundCardProps> = ({ id, name, volume, isActive
           className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer"
         />
         <Volume2 size={14} className="text-slate-500" />
+      </div>
+
+      <div className="flex gap-2 w-full mt-1">
+        {presets.map((preset) => (
+          <button
+            key={preset.label}
+            onClick={(e) => {
+              e.stopPropagation();
+              onVolumeChange(preset.val);
+            }}
+            className={`flex-1 text-[10px] uppercase font-bold py-1.5 rounded transition-colors
+              ${isActive && Math.abs(volume - preset.val) < 0.05 
+                ? 'bg-indigo-500/80 text-white' 
+                : 'bg-slate-800 text-slate-500 hover:bg-slate-700 hover:text-slate-300'
+              }
+            `}
+          >
+            {preset.label}
+          </button>
+        ))}
       </div>
     </div>
   );
