@@ -1,0 +1,5 @@
+{
+  "name": "FocusFlow Mixer",
+  "description": "A personalized ambient sound mixer powered by Gemini. Generate custom focus environments using procedural audio (Rain, Fire, Wind, etc.) based on your mood or task.",
+  "requestFramePermissions": []
+}
